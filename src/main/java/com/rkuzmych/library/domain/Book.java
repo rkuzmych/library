@@ -22,27 +22,40 @@ public class Book {
     @Basic
     private String name;
 
-    @Column(name = "page_count")
-    private Integer pageCount;
-
-    @Basic
-    private String isbn;
-
-    @ManyToOne
-    @JoinColumn
-    private Genre genre;
-
     @ManyToOne
     @JoinColumn
     private Author author;
 
     @ManyToOne
     @JoinColumn
-    private Publisher publisher;
+    private Genre genre;
+
+
+    @Column(name = "page_count")
+    private Integer pageCount;
+
 
     @Column(name = "publish_year")
     private Integer publishYear;
 
+
+
     @Column(name = "descr")
     private String description;
+
+    @Column(name = "file_name")
+    private String fileName;
+
+
+    public Book(Author author, String name, Genre genre, Integer pageCount, Integer publishYear) {
+        this.author = author;
+        this.name = name;
+        this.genre = genre;
+        this.pageCount = pageCount;
+        this.publishYear = publishYear;
+    }
+
+    public Book() {
+
+    }
 }

@@ -1,9 +1,6 @@
 package com.rkuzmych.library.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -24,8 +21,8 @@ public class Author {
     @Id
     private Long id;
 
-    @Basic
-    private String fio;
+    @Column(name = "fio")
+    private String name;
 
     @Basic
     private Date birthday;
@@ -33,8 +30,9 @@ public class Author {
     @OneToMany(mappedBy = "author")
     private List<Book> books;
 
+
     @Override
     public String toString() {
-        return fio;
+        return name;
     }
 }
