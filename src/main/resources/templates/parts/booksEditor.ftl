@@ -35,7 +35,8 @@
                 <input type="text" name="publishYear" value="<#if book??>${book.publishYear}</#if>"
                        placeholder="publishYear"/> <br/>
             </div>
-
+            <#--csrf-->
+            <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <button type="submit" class="btn btn-primary">Save film</button>
         </form>
     </div>

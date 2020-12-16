@@ -1,18 +1,12 @@
 package com.rkuzmych.library.domain;
 
 import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "book", catalog = "library")
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
 public class Book {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,9 +12,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "author", catalog = "library")
-@DynamicUpdate
-@DynamicInsert
-@SelectBeforeUpdate
 public class Author {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
