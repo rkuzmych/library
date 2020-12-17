@@ -24,7 +24,6 @@ public class Book {
     @JoinColumn
     private Genre genre;
 
-
     @Column(name = "page_count")
     private Integer pageCount;
 
@@ -32,13 +31,14 @@ public class Book {
     @Column(name = "publish_year")
     private Integer publishYear;
 
-
-
     @Column(name = "descr")
     private String description;
 
     @Column(name = "file_name")
     private String fileName;
+
+    @Column(name = "book_pdf_name")
+    private String pdfName;
 
 
     public Book(Author author, String name, Genre genre, Integer pageCount, Integer publishYear) {

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-4">
-                <form method="post" action="input5.php">
+                <form method="post">
                     <p>Check the genre</p>
                     <#list genres as genre>
                         <p>

@@ -1,6 +1,7 @@
 package com.rkuzmych.library.Service;
 
 import com.rkuzmych.library.domain.User;
+import com.rkuzmych.library.domain.UserRole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-@Data
-@Service
-public class UserDetailsImpl implements UserDetails {
 
+@Service
+public class UserDetailsImpl implements UserDetails{
+    private static final long serialVersionUID = 1L;
     private User user;
 
     @Override
@@ -56,5 +57,9 @@ public class UserDetailsImpl implements UserDetails {
 
     public void setActive() {
         user.setActive(true);
+    }
+
+    public boolean isAdmin() {
+        return user.getRoles().contains(UserRole.ADMIN);
     }
 }

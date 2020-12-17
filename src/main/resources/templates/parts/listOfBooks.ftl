@@ -1,3 +1,4 @@
+<#include "security.ftl">
 <section class="jumbotron text-center" style="background-color: white">
     <div class="container">
         <h1 class="jumbotron-heading">List of books</h1>
@@ -7,7 +8,7 @@
     </div>
 </section>
 
-<div class="album py-5 bg-light">
+<div class="album py-5" style="background-color: #F0F0F0;">
     <div class="container">
         <div class="row">
 
@@ -21,8 +22,12 @@
                         <p class="card-text">${book.name}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                <#if book.pdfName??>
+                                    <a href="/pdf/${book.pdfName}" class="btn btn-sm btn-outline-secondary">Read book</a>
+                                </#if>
+                                    <#if isAdmin>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </#if>
                             </div>
                             <small class="text-muted">${book.pageCount} pages</small>
                         </div>

@@ -1,6 +1,5 @@
-<div class="row">
-    <div>
-        <form method="post" class="mt-3" enctype="multipart/form-data">
+<div class="col-12 col-md-6 col-xl-5 pt-5" style="min-height: 500px;">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleFormControlFile1">Choose the foto of book</label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo">
@@ -35,9 +34,13 @@
                 <input type="text" name="publishYear" value="<#if book??>${book.publishYear}</#if>"
                        placeholder="publishYear"/> <br/>
             </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Choose pdf of book</label>
+                <input type="file" class="form-control-file" name="pdf">
+            </div>
             <#--csrf-->
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <button type="submit" class="btn btn-primary">Save film</button>
+            <button type="submit" class="btn btn-primary">Save Book</button>
         </form>
-    </div>
 </div>

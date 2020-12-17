@@ -48,15 +48,18 @@ public class BooksController {
             @RequestParam("genre") String genre_name,
             @RequestParam("pageCount") Integer pageCount,
             @RequestParam("publishYear") Integer publishYear,
-            @RequestParam("photo") MultipartFile file
+            @RequestParam("photo") MultipartFile photo,
+            @RequestParam("pdf") MultipartFile pdf
     ) throws IOException {
         Genre genre = genreRepository.findByType(genre_name);
         Author author = authorRepository.findByName(authorName);
 
         Book book = new Book(author, name, genre, pageCount, publishYear);
-        bookService.saveFile(book, file);
+        bookService.saveFile(book, photo, "photo");
+        bookService.saveFile(book, pdf, "pdf");
         bookRepository.save(book);
 
         return "redirect:index";
     }
+
 }

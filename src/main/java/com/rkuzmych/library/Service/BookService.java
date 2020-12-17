@@ -14,7 +14,7 @@ public class BookService {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public void saveFile(Book book, MultipartFile file) throws IOException {
+    public void saveFile(Book book, MultipartFile file, String key) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -25,9 +25,13 @@ public class BookService {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            book.setFileName(resultFilename);
+            if (key == "photo") {
+                file.transferTo(new File(uploadPath + "/img/" + resultFilename));
+                book.setFileName(resultFilename);
+            } else if(key == "pdf") {
+                file.transferTo(new File(uploadPath + "/pdf/" + resultFilename));
+                book.setPdfName(resultFilename);
+            }
         }
     }
 
@@ -38,4 +42,6 @@ public class BookService {
     public void setUploadPath(String uploadPath) {
         this.uploadPath = uploadPath;
     }
+
+
 }
