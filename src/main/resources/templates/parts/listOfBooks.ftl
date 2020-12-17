@@ -23,10 +23,10 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <#if book.pdfName??>
-                                    <a href="/pdf/${book.pdfName}" class="btn btn-sm btn-outline-secondary">Read book</a>
+                                    <a href="/pdf/${book.pdfName}" class="btn btn-sm btn-outline-secondary" role="button">Read book</a>
                                 </#if>
                                     <#if isAdmin>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <a href="/edit/${book.id}" class="btn btn-sm btn-outline-secondary" role="button">Edit</a>
                                     </#if>
                             </div>
                             <small class="text-muted">${book.pageCount} pages</small>
