@@ -1,6 +1,7 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
+    <div style="min-height: 550px;">
     <table class="table p-5">
         <thead class="thead-dark">
         <tr>
@@ -21,5 +22,5 @@
         </#list>
         </tbody>
     </table>
-
+    </div>
 </@c.page>

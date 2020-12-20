@@ -1,16 +1,19 @@
 package com.rkuzmych.library.domain;
 
 import lombok.Data;
+import org.checkerframework.checker.units.qual.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
 @Table(name = "book", catalog = "library")
 public class Book {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Basic

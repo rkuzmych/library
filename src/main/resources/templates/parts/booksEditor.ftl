@@ -1,12 +1,21 @@
 <div class="col-12 col-md-6 col-xl-5 pt-5" style="min-height: 500px;">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="exampleFormControlFile1">Choose the foto of book</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo">
+                <label for="exampleFormControlFile1">
+                    <#if book??>
+                            Photo of book is chused
+                        <#else>
+                            Choose the foto of book
+                    </#if>
+                </label>
+                <input type="file" class="form-control-file" name="photo">
             </div>
 
             <div class="form-group">
                 <select name="author">
+                    <#if isEditorForm??>
+                    <option name="allAuthors"><#if book??>${book.author.name}<#else> Choose author</#if></option>
+                    </#if>
                     <#list authors as author>
                     <option>${author.name}</option>
                     </#list>
@@ -20,6 +29,10 @@
 
             <div class="form-group">
                 <select name="genre">
+                    <#if isEditorForm??>
+                        <option><#if book??>${book.genre.type}<#else>Choose genre</#if></option>
+                    </#if>
+
                     <#list genres as genre>
                         <option>${genre.type}</option>
                     </#list>
@@ -35,8 +48,16 @@
                        placeholder="publishYear"/> <br/>
             </div>
 
+            <input type="hidden" name="id" value="<#if book??>${book.id}</#if>"/>
+
             <div class="form-group">
-                <label for="exampleFormControlFile1">Choose pdf of book</label>
+                <label for="exampleFormControlFile1">
+                    <#if book??>
+                        PDF of book is chused
+                    <#else>
+                        Choose the PDF of book
+                    </#if>
+                </label>
                 <input type="file" class="form-control-file" name="pdf">
             </div>
             <#--csrf-->

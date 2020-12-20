@@ -48,7 +48,7 @@
 
     <#if user??>
         <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-danger" type="submit">
                 Log out
             </button>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />

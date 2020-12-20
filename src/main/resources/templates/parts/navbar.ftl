@@ -15,10 +15,10 @@
             </li>
             <#if isAdmin>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/user">Users</a>
+                    <a class="nav-link" href="/user/list">Users</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/books">Books</a>
+                    <a class="nav-link" href="/books">Create Book</a>
                 </li>
             </#if>
         </ul>

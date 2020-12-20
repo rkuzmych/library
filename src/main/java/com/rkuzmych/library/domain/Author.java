@@ -14,15 +14,14 @@ import java.util.List;
 @Table(name = "author", catalog = "library")
 public class Author {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "fio")
     private String name;
 
-    @Basic
-    private Date birthday;
 
     @OneToMany(mappedBy = "author")
     private List<Book> books;
