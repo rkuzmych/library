@@ -8,11 +8,9 @@ import com.rkuzmych.library.domain.Genre;
 import com.rkuzmych.library.repository.AuthorRepository;
 import com.rkuzmych.library.repository.BookRepository;
 import com.rkuzmych.library.repository.GenreRepository;
-import com.rkuzmych.library.service.EntityValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,15 +27,13 @@ public class BooksController {
     private final BookRepository bookRepository;
     private final BookService bookService;
     private final AuthorRepository authorRepository;
-    private final EntityValidationService entityValidationService;
 
     @Autowired
-    public BooksController(GenreRepository genreRepository, BookRepository bookRepository, BookService bookService, AuthorRepository authorRepository, EntityValidationService entityValidationService) {
+    public BooksController(GenreRepository genreRepository, BookRepository bookRepository, BookService bookService, AuthorRepository authorRepository) {
         this.genreRepository = genreRepository;
         this.bookRepository = bookRepository;
         this.bookService = bookService;
         this.authorRepository = authorRepository;
-        this.entityValidationService = entityValidationService;
     }
 
     private static Iterable<Author> authors;
