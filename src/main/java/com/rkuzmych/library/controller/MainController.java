@@ -1,6 +1,6 @@
-package com.rkuzmych.library.controllers;
+package com.rkuzmych.library.controller;
 
-import com.rkuzmych.library.Service.BookService;
+import com.rkuzmych.library.service.BookService;
 import com.rkuzmych.library.domain.Author;
 import com.rkuzmych.library.domain.Book;
 import com.rkuzmych.library.domain.Genre;

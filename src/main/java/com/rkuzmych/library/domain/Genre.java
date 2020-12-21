@@ -9,10 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "genre", catalog = "library")
 public class Genre {
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Basic

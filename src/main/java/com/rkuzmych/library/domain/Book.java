@@ -1,17 +1,14 @@
 package com.rkuzmych.library.domain;
 
 import lombok.Data;
-import org.checkerframework.checker.units.qual.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
 @Table(name = "book", catalog = "library")
 public class Book {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +27,6 @@ public class Book {
     @Column(name = "page_count")
     private Integer pageCount;
 
-
     @Column(name = "publish_year")
     private Integer publishYear;
 
@@ -42,7 +38,6 @@ public class Book {
 
     @Column(name = "book_pdf_name")
     private String pdfName;
-
 
     public Book(Author author, String name, Genre genre, Integer pageCount, Integer publishYear) {
         this.author = author;

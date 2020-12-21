@@ -1,6 +1,6 @@
-package com.rkuzmych.library.controllers;
+package com.rkuzmych.library.controller;
 
-import com.rkuzmych.library.Service.UserService;
+import com.rkuzmych.library.service.UserService;
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
 import com.rkuzmych.library.repository.UserRepository;

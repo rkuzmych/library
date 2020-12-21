@@ -1,4 +1,4 @@
-package com.rkuzmych.library.Service;
+package com.rkuzmych.library.service;
 
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
@@ -6,6 +6,8 @@ import com.rkuzmych.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,9 +30,7 @@ public class UserService {
     public boolean saveUser(
             User user
     ) {
-        User userFromDatabase = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDatabase != null) {
+        if (userExists(user)) {
             return false;
         }
 
@@ -58,5 +58,20 @@ public class UserService {
         }
 
         userRepository.save(user);
+    }
+
+    public boolean checkEmptyFields(User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean userExists(User user) {
+        User userFromDb = userRepository.findByUsername(user.getUsername());
+        if (userFromDb != null) {
+           return true;
+        }
+        return false;
     }
 }

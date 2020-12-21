@@ -1,4 +1,4 @@
-package com.rkuzmych.library.Service;
+package com.rkuzmych.library.impl;
 
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
@@ -62,4 +62,5 @@ public class UserDetailsImpl implements UserDetails{
     public boolean isAdmin() {
         return user.getRoles().contains(UserRole.ADMIN);
     }
+
 }

@@ -1,4 +1,4 @@
-package com.rkuzmych.library.Service;
+package com.rkuzmych.library.service;
 
 import com.rkuzmych.library.domain.Author;
 import com.rkuzmych.library.domain.Book;
@@ -9,7 +9,6 @@ import com.rkuzmych.library.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -30,10 +29,15 @@ public class BookService{
         this.bookRepository = bookRepository;
         this.genreRepository = genreRepository;
         this.authorRepository = authorRepository;
+
+    }
+
+    private boolean isFileExist(MultipartFile file){
+        return file != null && !file.getOriginalFilename().isEmpty();
     }
 
     public void saveFile(Book book, MultipartFile file, String key) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
+        if (isFileExist(file)) {
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
@@ -53,21 +57,14 @@ public class BookService{
         }
     }
 
-    public void setNameAndCountAndYear(Book book, String name, Integer pageCount, Integer publishYear) {
-        if (!StringUtils.isEmpty(name)) {
+    public Book saveBook(Book book, String name, Integer pageCount, Integer publishYear) {
             book.setName(name);
-        }
-
-        if (!StringUtils.isEmpty(pageCount)) {
             book.setPageCount(pageCount);
-        }
-
-        if (!StringUtils.isEmpty(pageCount)) {
             book.setPublishYear(publishYear);
-        }
+            return book;
     }
 
-    public void getAuthorAndGenreByNames(Book book, Author author, Genre genre, String authorName, String genreName) {
+    public void getAuthorAndGenre(Book book, Author author, Genre genre, String authorName, String genreName) {
         genre = genreRepository.findByType(genreName);
         author = authorRepository.findByName(authorName);
     }

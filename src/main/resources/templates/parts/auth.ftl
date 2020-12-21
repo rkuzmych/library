@@ -1,4 +1,5 @@
 <#macro login path isRegisterForm>
+    <#include "security.ftl">
 
 <div class="row justify-content-center p-5" style="min-height: 580px;">
     <div class="col-12 col-md-6 col-xl-4 ">
@@ -10,6 +11,9 @@
                         Login
                 </#if>
             </h2>
+            <#if message??>
+                ${message}
+            </#if>
             <p>
                 <label for="username">Username</label>
                 <#if userExistError??>
@@ -46,7 +50,7 @@
 <#include "security.ftl">
 <#macro log_button>
 
-    <#if user??>
+    <#if isActive>
         <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-danger" type="submit">
                 Log out

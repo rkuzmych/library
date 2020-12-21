@@ -1,11 +1,12 @@
-package com.rkuzmych.library.controllers;
+package com.rkuzmych.library.controller;
 
-import com.rkuzmych.library.Service.UserService;
+import com.rkuzmych.library.service.UserService;
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -34,16 +35,21 @@ public class AuthController {
 
     @PostMapping("/registration")
     public String addUser(
-            @Valid User user, Model model
+            @Valid User user,
+            BindingResult bindingResult,
+            Model model
     ) {
-
-        User userFromDb = userRepository.findByUsername(user.getUsername());
-
-        if (userFromDb != null) {
-            model.addAttribute("message", "User exists!");
+        boolean haveEmptyFields = userService.checkEmptyFields(user, bindingResult, model);
+        if (haveEmptyFields) {
+            model.addAttribute("message", "You have epmty fields!");
             return "registration";
         }
 
+
+        if (userService.userExists(user)) {
+            model.addAttribute("message", "User exists!");
+            return "registration";
+        }
 
         userService.saveUser(user);
 
