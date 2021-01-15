@@ -1,4 +1,5 @@
 <div class="col-12 col-md-6 col-xl-5 pt-5" style="min-height: 500px;">
+
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="exampleFormControlFile1">
@@ -14,11 +15,19 @@
         <div class="form-group">
             <select name="author">
                 <#if isEditorForm??>
-                    <option name="allAuthors"><#if book??>${book.author.name}<#else> Choose author</#if></option>
+                    <option name="allAuthors" value="${authorId}">
+                        <#if book??>
+                                ${book.author.name}
+                            <#else>
+                                Choose author
+                        </#if>
+                    </option>
                 </#if>
+
                 <#list authors as author>
-                    <option>${author.name}</option>
+                    <option value="${author.id}">${author.name}</option>
                 </#list>
+
             </select>
         </div>
 
@@ -30,11 +39,16 @@
         <div class="form-group">
             <select name="genre">
                 <#if isEditorForm??>
-                    <option><#if book??>${book.genre.type}<#else>Choose genre</#if></option>
+                    <option value="${genreId}">
+                        <#if book??>
+                            ${book.genre.type}
+                        <#else>
+                            Choose genre</#if>
+                    </option>
                 </#if>
 
                 <#list genres as genre>
-                    <option>${genre.type}</option>
+                    <option value="${genre.id}">${genre.type}</option>
                 </#list>
             </select>
         </div>
@@ -48,7 +62,7 @@
                    placeholder="publishYear"/> <br/>
         </div>
 
-        <input type="hidden" name="id" value="<#if book??>${book.id}</#if>"/>
+        <#if book??><input type="hidden" name="id" value="${book.id}"/></#if>
 
         <div class="form-group">
             <label for="exampleFormControlFile1">

@@ -17,7 +17,7 @@
             <p>
                 <label for="username">Username</label>
                 <#if userExistError??>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" class="text-danger">
                         ${userExistError}
                     </div>
                  </#if>
@@ -26,8 +26,22 @@
 
             <p>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required>
             </p>
+
+            <#if isRegisterForm>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password2" class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                       placeholder="Password confirmation" required>
+            </p>
+                <p class="text-danger">
+                <#if passwordError??>
+                        ${passwordError}
+                </#if>
+                </p>
+            </#if>
             <#--csrf-->
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <button class="btn btn-lg btn-primary btn-block" type="submit">

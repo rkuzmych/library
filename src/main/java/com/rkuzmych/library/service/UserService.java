@@ -1,5 +1,6 @@
 package com.rkuzmych.library.service;
 
+import com.rkuzmych.library.controller.UtilsController;
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
 import com.rkuzmych.library.repository.UserRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 
 import java.util.Arrays;
@@ -73,5 +75,27 @@ public class UserService {
            return true;
         }
         return false;
+    }
+
+
+    public boolean validateUser(User user, String passwordConfirm, BindingResult bindingResult, Model model) {
+        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
+        boolean differentPasswords = (user.getPassword() != null ) && (!user.getPassword().equals(passwordConfirm));
+
+        if (isConfirmEmpty) {
+            model.addAttribute("password2Error", "Password  confirmation not be empty");
+        }
+        if (differentPasswords) {
+            model.addAttribute("passwordError", "Passwords are different!");
+        }
+
+        if (bindingResult.hasErrors() || isConfirmEmpty || differentPasswords) {
+            Map<String, String> errors = UtilsController.getErrors(bindingResult);
+
+            model.mergeAttributes(errors);
+
+            return false;
+        }
+        return true;
     }
 }

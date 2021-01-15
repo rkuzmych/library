@@ -9,7 +9,6 @@ import com.rkuzmych.library.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Service
-public class BookService{
+public class BookService {
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -33,7 +32,7 @@ public class BookService{
 
     }
 
-    private boolean isFileExist(MultipartFile file){
+    private boolean isFileExist(MultipartFile file) {
         return file != null && !file.getOriginalFilename().isEmpty();
     }
 
@@ -51,7 +50,7 @@ public class BookService{
             if (key == "photo") {
                 file.transferTo(new File(uploadPath + "/img/" + resultFilename));
                 book.setFileName(resultFilename);
-            } else if(key == "pdf") {
+            } else if (key == "pdf") {
                 file.transferTo(new File(uploadPath + "/pdf/" + resultFilename));
                 book.setPdfName(resultFilename);
             }
@@ -59,10 +58,11 @@ public class BookService{
     }
 
     public Book saveBook(Book book, String name, Integer pageCount, Integer publishYear) {
-            book.setName(name);
-            book.setPageCount(pageCount);
-            book.setPublishYear(publishYear);
-            return book;
+        book.setName(name);
+        book.setPageCount(pageCount);
+        book.setPublishYear(publishYear);
+        bookRepository.save(book);
+        return book;
     }
 
     public void getAuthorAndGenre(Book book, Author author, Genre genre, String authorName, String genreName) {
@@ -79,11 +79,11 @@ public class BookService{
         Iterable<Book> books;
         if (filter != null && !filter.isEmpty()) {
             books = bookRepository.findByName(filter);
-        } else if(genre != null && author != null) {
+        } else if (genre != null && author != null) {
             books = bookRepository.findByGenreAndAuthor(genre, author);
-        }else if(genre != null) {
+        } else if (genre != null) {
             books = bookRepository.findByGenre(genre);
-        } else if(author != null) {
+        } else if (author != null) {
             books = bookRepository.findByAuthor(author);
         } else {
             books = bookRepository.findAll();
