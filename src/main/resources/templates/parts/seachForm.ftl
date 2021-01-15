@@ -1,4 +1,4 @@
-<div class="row pb-5">
+<div class="row pb-5 search-block">
     <div class="col-sm">
         <form class="form-inline" method="get" enctype="multipart/form-data">
             <#include "listOfGenres.ftl" />

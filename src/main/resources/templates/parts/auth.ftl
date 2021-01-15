@@ -66,7 +66,7 @@
 
     <#if isActive>
         <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger" type="submit">
+            <button class="btn btn-outline-light" type="submit">
                 Log out
             </button>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
@@ -74,7 +74,7 @@
 
         <#else>
             <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-primary" href="/login">Log in</a>
+                <a class="btn btn-info" href="/login">Log in</a>
                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
             </form>
     </#if>

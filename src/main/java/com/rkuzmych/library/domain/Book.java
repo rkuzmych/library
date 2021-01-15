@@ -1,8 +1,12 @@
 package com.rkuzmych.library.domain;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
@@ -13,6 +17,8 @@ public class Book {
     private Long id;
 
     @Basic
+    @NotBlank(message = "Please fill the name of book")
+    @Length(max = 100, message = "Name too long (more than 100)")
     private String name;
 
     @ManyToOne
@@ -24,9 +30,13 @@ public class Book {
     private Genre genre;
 
     @Column(name = "page_count")
+    @NotNull(message = "Please fill the pages count")
+    @Range(min = 1, max = Integer.MAX_VALUE, message = "Quantity of pages can not be smaller than 1 and bigger than int")
     private Integer pageCount;
 
     @Column(name = "publish_year")
+    @NotNull(message = "Please fill the pages count")
+    @Range(min = -3000, max = 2021, message = "Do you think it is correct year?")
     private Integer publishYear;
 
     @Column(name = "descr")

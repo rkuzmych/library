@@ -14,13 +14,9 @@
 
         <div class="form-group">
             <select name="author">
-                <#if isEditorForm??>
+                <#if book??>
                     <option name="allAuthors" value="${authorId}">
-                        <#if book??>
-                                ${book.author.name}
-                            <#else>
-                                Choose author
-                        </#if>
+                        ${book.author.name}
                     </option>
                 </#if>
 
@@ -32,18 +28,21 @@
         </div>
 
         <div class="form-group">
-            <input type="text" name="name" value="<#if book??>${book.name}</#if>"
-                   placeholder="name"/>
+            <input type="text" class="form-control ${(nameError??)?string('is-invalid', '')}"
+                   value="<#if book??>${book.name}</#if>" name="name" placeholder="Name of Book"/>
+            <#if nameError??>
+                <div class="invalid-feedback">
+                    ${nameError}
+                </div>
+            </#if>
         </div>
+
 
         <div class="form-group">
             <select name="genre">
-                <#if isEditorForm??>
+                <#if book??>
                     <option value="${genreId}">
-                        <#if book??>
-                            ${book.genre.type}
-                        <#else>
-                            Choose genre</#if>
+                        ${book.genre.type}
                     </option>
                 </#if>
 
@@ -52,17 +51,35 @@
                 </#list>
             </select>
         </div>
-        <div class="form-group">
-            <input type="text" name="pageCount" value="<#if book??>${book.pageCount}</#if>"
-                   placeholder="pageCount"/> <br/>
-        </div>
+
 
         <div class="form-group">
-            <input type="text" name="publishYear" value="<#if book??>${book.publishYear}</#if>"
-                   placeholder="publishYear"/> <br/>
+            <input type="number" class="form-control ${(pageCountError??)?string('is-invalid', '')}"
+                   value="<#if book??>${book.pageCount}</#if>" name="pageCount" placeholder="Input count of pages"
+                   required/>
+            <#if pageCountError??>
+                <div class="invalid-feedback">
+                    ${pageCountError}
+                </div>
+            </#if>
         </div>
 
-        <#if book??><input type="hidden" name="id" value="${book.id}"/></#if>
+
+        <div class="form-group">
+            <input type="number" class="form-control ${(publishYearError??)?string('is-invalid', '')}"
+                   value="<#if book??>${book.publishYear}</#if>" name="publishYear" placeholder="Input year of book"
+                   required/>
+            <#if publishYearError??>
+                <div class="invalid-feedback">
+                    ${publishYearError}
+                </div>
+            </#if>
+        </div>
+
+
+        <#if isEditorForm??>
+            <input type="hidden" name="id" value="${book.id}"/>
+        </#if>
 
         <div class="form-group">
             <label for="exampleFormControlFile1">
