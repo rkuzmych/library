@@ -53,31 +53,6 @@ public class BooksController {
         return "createBook";
     }
 
-
-    /*@PostMapping("/books")
-    public String createBook(
-            @Valid Book book,
-            @RequestParam("photo") MultipartFile photo,
-            @RequestParam("pdf") MultipartFile pdf,
-            BindingResult bindingResult,
-            Model model
-    ) throws IOException {
-
-        boolean validationSuccessful = bookService.validateBook(book, bindingResult, model);
-        if (validationSuccessful) {
-            bookService.saveFile(book, photo, "photo");
-            bookService.saveFile(book, pdf, "pdf");
-
-            bookRepository.save(book);
-        } else {
-            model.addAttribute("book", book);
-            return "createBook";
-        }
-
-
-        return "redirect:index";
-    }*/
-
     @PostMapping("/books")
     public String add(
             @Valid Book book,
