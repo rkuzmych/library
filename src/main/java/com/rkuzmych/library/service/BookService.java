@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,6 +64,7 @@ public class BookService {
             if (!pdfDir.exists()) {
                 pdfDir.mkdir();
             }
+
 
 
             String uuidFile = UUID.randomUUID().toString();
@@ -168,6 +170,16 @@ public class BookService {
         model.addAttribute("authorId", book.getAuthor().getId());
         if (isEditForm) {
             model.addAttribute("isEditorForm", true);
+        }
+    }
+
+    public void genreAndAuthorPagination(String genreType, String authorName, Model model) {
+        if (!StringUtils.isEmpty(genreType) && genreType != null) {
+            model.addAttribute("genreType", genreType);
+        }
+
+        if (!StringUtils.isEmpty(authorName) && authorName != null) {
+            model.addAttribute("authorName", authorName);
         }
     }
 

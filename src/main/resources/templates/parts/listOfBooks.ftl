@@ -1,6 +1,7 @@
 <#include "security.ftl">
 <#import "pager.ftl" as p>
 
+
 <div class="album py-5">
     <div class="container">
         <div class="row">
@@ -12,7 +13,7 @@
                              <#if book.fileName??>
                              "/img/${book.fileName}
                                   </#if>
-                            " class="card-img-top" style="height: 375px;">
+                            " class="card-img-top">
 
                         <div class="card-body">
                             <h5 class="card-title">${book.name}</h5>

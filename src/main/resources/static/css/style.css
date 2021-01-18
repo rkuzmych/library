@@ -26,3 +26,7 @@ footer {
 .form-search {
     margin-left: 3px;
 }
+
+.card-img-top {
+    height: 375px;
+}

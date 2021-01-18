@@ -43,7 +43,7 @@ public class MainController {
             @RequestParam(required = false, defaultValue = "") String filter,
             @RequestParam(required = false) String genreType,
             @RequestParam(required = false) String authorName,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC, size = 6) Pageable pageable,
             Model model
     ) {
         genres = genreRepository.findAll();
@@ -52,19 +52,20 @@ public class MainController {
         Genre genre = genreRepository.findByType(genreType);
         Author author = authorRepository.findByName(authorName);
 
-
         Page<Book> page = bookService.getBooks(filter, genre, author, pageable);
+
+
+        bookService.genreAndAuthorPagination(genreType, authorName, model);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/index");
 
-        model.addAttribute("isMainPage", true);
         model.addAttribute("genres", genres);
         model.addAttribute("authors", authors);
         model.addAttribute("filter", filter);
 
+        model.addAttribute("isMainPage", true);
         return "index";
     }
-
 
 }

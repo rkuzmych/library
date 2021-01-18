@@ -14,23 +14,23 @@
                 <#if message??>
                     ${message}
                 </#if>
-            <p>
-                <label for="username">Username</label>
-                <#if userExistError??>
-                    <div class="invalid-feedback" class="text-danger">
-                        ${userExistError}
-                    </div>
-                 </#if>
+                <p>
+                    <label for="username">Username</label>
+                    <#if userExistError??>
+                <div class="invalid-feedback" class="text-danger">
+                    ${userExistError}
+                </div>
+                </#if>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
-            </p>
+                </p>
 
-            <p>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
-                       required>
-            </p>
+                <p>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                           required>
+                </p>
 
-            <#if isRegisterForm>
+                <#if isRegisterForm>
             <p>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password2" class="form-control ${(passwordError??)?string('is-invalid', '')}"
