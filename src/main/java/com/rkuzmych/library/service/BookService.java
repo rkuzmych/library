@@ -49,8 +49,17 @@ public class BookService {
         if (isFileExist(file)) {
             File uploadDir = new File(uploadPath);
 
+            File imgDir = new File(uploadPath + "/img");
+            File pdfDir = new File(uploadPath + "/pdf");
+
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
+            }
+            if (!imgDir.exists()) {
+                imgDir.mkdir();
+            }
+            if (!pdfDir.exists()) {
+                pdfDir.mkdir();
             }
 
             String uuidFile = UUID.randomUUID().toString();
