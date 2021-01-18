@@ -53,9 +53,7 @@ public class MainController {
         Author author = authorRepository.findByName(authorName);
 
         Page<Book> page = bookService.getBooks(filter, genre, author, pageable);
-
-
-        bookService.genreAndAuthorPagination(genreType, authorName, model);
+        bookService.filterPagination(genreType, authorName, model);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/index");

@@ -173,7 +173,7 @@ public class BookService {
         }
     }
 
-    public void genreAndAuthorPagination(String genreType, String authorName, Model model) {
+    public void filterPagination(String genreType, String authorName, Model model) {
         if (!StringUtils.isEmpty(genreType) && genreType != null) {
             model.addAttribute("genreType", genreType);
         }
