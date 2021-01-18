@@ -25,7 +25,10 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(
+            Model model
+    ) {
+        model.addAttribute("isLoginPage", true);
         return "login";
     }
 

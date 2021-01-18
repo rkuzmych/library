@@ -10,6 +10,8 @@ import com.rkuzmych.library.repository.BookRepository;
 import com.rkuzmych.library.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,9 +51,19 @@ public class BookService {
         if (isFileExist(file)) {
             File uploadDir = new File(uploadPath);
 
+            File imgDir = new File(uploadPath + "/img");
+            File pdfDir = new File(uploadPath + "/pdf");
+
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
+            if (!imgDir.exists()) {
+                imgDir.mkdir();
+            }
+            if (!pdfDir.exists()) {
+                pdfDir.mkdir();
+            }
+
 
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
@@ -74,28 +86,23 @@ public class BookService {
         return book;
     }
 
-    public void findAuthorAndGenre(Book book, Author author, Genre genre, String authorName, String genreName) {
-        genre = genreRepository.findByType(genreName);
-        author = authorRepository.findByName(authorName);
-    }
-
     public void setAuthorAndGenre(Book book, Author author, Genre genre) {
         book.setAuthor(author);
         book.setGenre(genre);
     }
 
-    public Iterable<Book> getBooks(String filter, Genre genre, Author author) {
-        Iterable<Book> books;
+    public Page<Book> getBooks(String filter, Genre genre, Author author, Pageable pageable) {
+        Page<Book> books;
         if (filter != null && !filter.isEmpty()) {
-            books = bookRepository.findByName(filter);
+            books = bookRepository.findByName(filter, pageable);
         } else if (genre != null && author != null) {
-            books = bookRepository.findByGenreAndAuthor(genre, author);
+            books = bookRepository.findByGenreAndAuthor(genre, author, pageable);
         } else if (genre != null) {
-            books = bookRepository.findByGenre(genre);
+            books = bookRepository.findByGenre(genre, pageable);
         } else if (author != null) {
-            books = bookRepository.findByAuthor(author);
+            books = bookRepository.findByAuthor(author, pageable);
         } else {
-            books = bookRepository.findAll();
+            books = bookRepository.findAll(pageable);
         }
         return books;
     }

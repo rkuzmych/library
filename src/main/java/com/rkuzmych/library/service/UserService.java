@@ -83,7 +83,7 @@ public class UserService {
         boolean differentPasswords = (user.getPassword() != null ) && (!user.getPassword().equals(passwordConfirm));
 
         if (isConfirmEmpty) {
-            model.addAttribute("password2Error", "Password  confirmation not be empty");
+            model.addAttribute("password2Error", "Password  confirmation can not be empty");
         }
         if (differentPasswords) {
             model.addAttribute("passwordError", "Passwords are different!");

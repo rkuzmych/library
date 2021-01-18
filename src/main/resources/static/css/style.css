@@ -1,0 +1,28 @@
+.navbar {
+    background-color: #3D3B3E;
+}
+
+.btn-logout {
+    background-color: #87374F;
+}
+
+.album {
+    background-color: #F6F4F6;
+}
+
+footer {
+    background-color: #3D3B3E;
+}
+
+.list-of-authors {
+    margin: 7px;
+}
+
+.login-card {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.form-search {
+    margin-left: 3px;
+}

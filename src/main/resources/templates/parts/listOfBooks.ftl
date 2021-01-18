@@ -1,17 +1,22 @@
 <#include "security.ftl">
+<#import "pager.ftl" as p>
+
 <div class="album py-5">
     <div class="container">
         <div class="row">
-
-            <#list books as book>
+            <#list page.content as book>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <#if book.fileName??>
-                            <img src="/img/${book.fileName}" class="card-img-top" style="max-height: 415px;">
-                        </#if>
+
+                        <img src=
+                             <#if book.fileName??>
+                             "/img/${book.fileName}
+                                  </#if>
+                            " class="card-img-top" style="height: 375px;">
+
                         <div class="card-body">
-                            <p class="card-text">${book.name}</p>
-                            <p class="card-text">${book.author.name}</p>
+                            <h5 class="card-title">${book.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${book.author.name}</h6>
                             <p class="card-text">${book.genre.type}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -32,8 +37,9 @@
                 </div>
             </div>
             <#else>
-                No books aviable
+                No books available
             </#list>
         </div>
     </div>
 </div>
+<@p.pager url page />

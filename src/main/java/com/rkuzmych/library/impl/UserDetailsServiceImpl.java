@@ -2,7 +2,6 @@ package com.rkuzmych.library.impl;
 
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
-import com.rkuzmych.library.impl.UserDetailsImpl;
 import com.rkuzmych.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

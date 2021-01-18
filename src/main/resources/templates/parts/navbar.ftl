@@ -14,6 +14,16 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
+
+            <#if isMainPage??>
+                <form class="form-inline form-search" method="get" enctype="multipart/form-data">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                           name="filter"
+                           action="filter">
+                    <button class="btn btn-light" type="submit">Search</button>
+                </form>
+            </#if>
+
             <#if isAdmin>
                 <li class="nav-item active">
                     <a class="nav-link" href="/user/list">Users</a>
@@ -23,6 +33,11 @@
                 </li>
             </#if>
         </ul>
-        <@a.log_button/>
+        <#if !isLoginPage??>
+            <@a.log_button/>
+        </#if>
     </div>
 </nav>
+
+<img src="/static/img/book.jpeg" class="img-fluid" alt="Responsive image">
+

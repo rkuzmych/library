@@ -1,13 +1,17 @@
 package com.rkuzmych.library.controller;
 
-import com.rkuzmych.library.service.BookService;
 import com.rkuzmych.library.domain.Author;
 import com.rkuzmych.library.domain.Book;
 import com.rkuzmych.library.domain.Genre;
 import com.rkuzmych.library.repository.AuthorRepository;
 import com.rkuzmych.library.repository.BookRepository;
 import com.rkuzmych.library.repository.GenreRepository;
+import com.rkuzmych.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +38,12 @@ public class MainController {
     private static Iterable<Genre> genres;
     private static Iterable<Author> authors;
 
-    @RequestMapping(value={"", "/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String getMainPage(
             @RequestParam(required = false, defaultValue = "") String filter,
             @RequestParam(required = false) String genreType,
             @RequestParam(required = false) String authorName,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
             Model model
     ) {
         genres = genreRepository.findAll();
@@ -47,9 +52,13 @@ public class MainController {
         Genre genre = genreRepository.findByType(genreType);
         Author author = authorRepository.findByName(authorName);
 
-        Iterable<Book> books = bookService.getBooks(filter, genre, author);
 
-        model.addAttribute("books", books);
+        Page<Book> page = bookService.getBooks(filter, genre, author, pageable);
+
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/index");
+
+        model.addAttribute("isMainPage", true);
         model.addAttribute("genres", genres);
         model.addAttribute("authors", authors);
         model.addAttribute("filter", filter);

@@ -1,19 +1,19 @@
 <#macro login path isRegisterForm>
     <#include "security.ftl">
 
-<div class="row justify-content-center p-5" style="min-height: 580px;">
-    <div class="col-12 col-md-6 col-xl-4 ">
-        <form class="form-sigin" method="post" action="${path}">
-            <h2 class="form-signin-heading">
-                <#if isRegisterForm>
-                    Add new user
+    <div class="row justify-content-center p-5 login-card">
+        <div class="col-12 col-md-6 col-xl-4 ">
+            <form class="form-sigin" method="post" action="${path}">
+                <h2 class="form-signin-heading">
+                    <#if isRegisterForm>
+                        Add new user
                     <#else>
                         Login
+                    </#if>
+                </h2>
+                <#if message??>
+                    ${message}
                 </#if>
-            </h2>
-            <#if message??>
-                ${message}
-            </#if>
             <p>
                 <label for="username">Username</label>
                 <#if userExistError??>
@@ -63,7 +63,6 @@
 <#--Button Log in/ Log out-->
 <#include "security.ftl">
 <#macro log_button>
-
     <#if isActive>
         <form action="/logout" method="post" class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-light" type="submit">
