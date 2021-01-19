@@ -44,14 +44,16 @@ public class BookService {
         this.authorRepository = authorRepository;
     }
 
+
     private boolean isFileExist(MultipartFile file) {
         return file != null && !file.getOriginalFilename().isEmpty();
     }
 
+    /*here we save pdf of book or photo*/
     public void saveFile(Book book, MultipartFile file, String key) throws IOException {
         if (isFileExist(file)) {
+            /*we create folders, if they do not exists*/
             File uploadDir = new File(uploadPath);
-
             File imgDir = new File(uploadPath + "/img");
             File pdfDir = new File(uploadPath + "/pdf");
 
@@ -64,8 +66,6 @@ public class BookService {
             if (!pdfDir.exists()) {
                 pdfDir.mkdir();
             }
-
-
 
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
@@ -93,11 +93,10 @@ public class BookService {
         book.setGenre(genre);
     }
 
+    /*here we filter books by keyword from search, or by genre + auhtor*/
     public Page<Book> getBooks(String filter, Genre genre, Author author, Pageable pageable) {
         Page<Book> books;
-        if (filter != null && !filter.isEmpty()) {
-            books = bookRepository.findByName(filter, pageable);
-        } else if (genre != null && author != null) {
+        if (genre != null && author != null) {
             books = bookRepository.findByGenreAndAuthor(genre, author, pageable);
         } else if (genre != null) {
             books = bookRepository.findByGenre(genre, pageable);
@@ -108,7 +107,6 @@ public class BookService {
         }
         return books;
     }
-
 
     public boolean validateBook(Book book, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -141,6 +139,7 @@ public class BookService {
         return true;
     }
 
+
     public void updateBook(Long id, Model model) {
         Optional<Book> book = bookRepository.findById(id);
         Book currentBook = book.get();
@@ -153,7 +152,6 @@ public class BookService {
         List<Author> authorList = Lists.newArrayList(authors);
 
         removeDuplicatesFromLists(currentBook, authorList, genreList);
-
         fillModelInBookEditor(currentBook, model, genreList, authorList, true);
     }
 
@@ -162,6 +160,7 @@ public class BookService {
         authorList.remove(book.getAuthor());
     }
 
+    /*we want to see old message.fields in inputs*/
     private void fillModelInBookEditor(Book book, Model model, List<Genre> genreList, List<Author> authorList, boolean isEditForm) {
         model.addAttribute("book", book);
         model.addAttribute("genres", genreList);
@@ -173,6 +172,7 @@ public class BookService {
         }
     }
 
+    /*pagination to filter fields*/
     public void filterPagination(String genreType, String authorName, Model model) {
         if (!StringUtils.isEmpty(genreType) && genreType != null) {
             model.addAttribute("genreType", genreType);

@@ -34,9 +34,8 @@ public class MainController {
         this.bookService = bookService;
     }
 
-
-    private static Iterable<Genre> genres;
-    private static Iterable<Author> authors;
+    private Iterable<Genre> genres;
+    private Iterable<Author> authors;
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String getMainPage(

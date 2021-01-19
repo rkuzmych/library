@@ -69,7 +69,6 @@ public class BooksController {
 
         bookService.saveFile(book, photo, "photo");
         bookService.saveFile(book, pdf, "pdf");
-
         bookRepository.save(book);
 
         return "redirect:index";

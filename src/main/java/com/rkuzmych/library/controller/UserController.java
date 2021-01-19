@@ -1,9 +1,9 @@
 package com.rkuzmych.library.controller;
 
-import com.rkuzmych.library.service.UserService;
 import com.rkuzmych.library.domain.User;
 import com.rkuzmych.library.domain.UserRole;
 import com.rkuzmych.library.repository.UserRepository;
+import com.rkuzmych.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -46,7 +46,7 @@ public class UserController {
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
-        userService.saveUser(user, username, form);
+        userService.changeNameAndRole(user, username, form);
 
         return "redirect:/user/list";
     }

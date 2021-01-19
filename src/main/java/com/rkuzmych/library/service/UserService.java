@@ -29,12 +29,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public boolean saveUser(
-            User user
-    ) {
-        if (userExists(user)) {
-            return false;
-        }
+    public boolean changeNameAndRole(User user) {
 
         user.setRoles(Collections.singleton(UserRole.USER));
         user.setActive(true);
@@ -44,7 +39,7 @@ public class UserService {
         return true;
     }
 
-    public void saveUser(User user, String username, Map<String, String> form) {
+    public void changeNameAndRole(User user, String username, Map<String, String> form) {
         user.setUsername(username);
 
         Set<String> roles = Arrays.stream(UserRole.values())
